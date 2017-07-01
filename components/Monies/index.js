@@ -1,11 +1,17 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import PropTypes from 'prop-types';
+import {View, Text, TouchableHighlight} from 'react-native';
 
-const component = ({monies}) => (
+const component = ({monies, getTheMonies}) => (
   <View>
+    <TouchableHighlight onPress={getTheMonies} >
+      <Text>Update The currency</Text>
+    </TouchableHighlight>
+
     <Text>Base Currency: {monies.base}</Text>
+
     <View>
-      {Object.keys(monies.rates).map(key => (
+      {monies.rates && Object.keys(monies.rates).map(key => (
         <Text key={key}>
           {key} : {monies.rates[key]}
           
@@ -18,5 +24,10 @@ const component = ({monies}) => (
     {/*<Text>Debug: {JSON.stringify(monies,null,2)}</Text>*/}
   </View>
 );
+
+component.propTypes = {
+  monies : PropTypes.object,
+  getTheMonies : PropTypes.func.isRequired,
+}
 
 export default component;

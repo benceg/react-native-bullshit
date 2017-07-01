@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getTheWeather, getTheMonies } from './actions';
@@ -24,7 +24,7 @@ class component extends Component {
   }
 
   render() {
-    const { name, weather, monies } = this.props;
+    const { name, weather, monies, getTheMonies } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text>Hello {name}</Text>
@@ -36,7 +36,10 @@ class component extends Component {
         )}
 
         {monies && (
-          <Monies monies={monies}/>
+          <View>
+
+            <Monies monies={monies} getTheMonies={() => getTheMonies()}/>
+          </View>
         )}
         <ColouredBar />
       </ScrollView>
