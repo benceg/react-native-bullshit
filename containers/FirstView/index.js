@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { ScrollView, View, Text, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getTheWeather, getTheMonies } from './actions';
+import { getTheWeather, getTheMonies, updateUserCurrency } from './actions';
+
 import Monies from '../../components/Monies';
 import ColouredBar from '../../components/ColouredBar';
 
@@ -12,9 +13,14 @@ class component extends Component {
     name: PropTypes.string.isRequired,
     weather: PropTypes.object,
     monies: PropTypes.object,
+    userCurrency: PropTypes.string,
     getTheWeather: PropTypes.func.isRequired,
     getTheMonies: PropTypes.func.isRequired,
+    updateUserCurrency: PropTypes.func.isRequired,
+  };
 
+  static defaultProps = {
+    userCurrency: 'GBP',
   };
 
   componentWillMount() {
@@ -24,7 +30,7 @@ class component extends Component {
   }
 
   render() {
-    const { name, weather, monies, getTheMonies } = this.props;
+    const { name, weather, monies, userCurrency, getTheMonies, updateUserCurrency } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.container}>
         <Text>Hello {name}</Text>
@@ -37,8 +43,19 @@ class component extends Component {
 
         {monies && (
           <View>
-
-            <Monies monies={monies} getTheMonies={() => getTheMonies()}/>
+            <TextInput
+              style={styles.textInput}
+              value={userCurrency}
+              onChangeText={value => updateUserCurrency(value)}
+            />
+            <Monies
+              monies={monies}
+              getTheMonies={() => getTheMonies()}
+              onTapMoney={currency => () => {
+                updateUserCurrency(currency);
+                getTheMonies();
+              }}
+            />
           </View>
         )}
         <ColouredBar />
@@ -51,17 +68,24 @@ const styles = StyleSheet.create({
   container: {
     paddingTop: 40,
   },
+  textInput: {
+    width: '75%',
+    height: 50,
+    borderWidth: 1,
+  },
 });
 
 const mapStateToProps = state => ({
   name: state.FirstView.name,
   weather: state.FirstView.weather,
   monies: state.FirstView.monies,
+  userCurrency: state.FirstView.userCurrency,
 });
 
 const mapDispatchToProps = {
   getTheWeather,
   getTheMonies,
+  updateUserCurrency,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(component);
