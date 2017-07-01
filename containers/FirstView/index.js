@@ -3,9 +3,12 @@ import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
+import ColouredBar from '../../components/ColouredBar';
+
 const component = ({ name }) => (
   <View style={styles.container}>
     <Text>Hello {name}</Text>
+    <ColouredBar />
   </View>
 );
 
