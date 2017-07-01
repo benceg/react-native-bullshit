@@ -1,28 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { getTheWeather } from './actions';
-
+import { getTheWeather, getTheMonies } from './actions';
+import Monies from '../../components/Monies';
 import ColouredBar from '../../components/ColouredBar';
 
 class component extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     weather: PropTypes.object,
+    monies: PropTypes.object,
     getTheWeather: PropTypes.func.isRequired,
+    getTheMonies: PropTypes.func.isRequired,
+
   };
 
   componentWillMount() {
-    const { getTheWeather } = this.props;
+    const { getTheWeather, getTheMonies } = this.props;
     getTheWeather();
+    getTheMonies();
   }
 
   render() {
-    const { name, weather } = this.props;
+    const { name, weather, monies } = this.props;
     return (
-      <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.container}>
         <Text>Hello {name}</Text>
         {weather && (
           <View>
@@ -30,28 +34,31 @@ class component extends Component {
             <Text>Temperature: {weather.main.temp_min}/{weather.main.temp_max}</Text>
           </View>
         )}
+
+        {monies && (
+          <Monies monies={monies}/>
+        )}
         <ColouredBar />
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 40,
   },
 });
 
 const mapStateToProps = state => ({
   name: state.FirstView.name,
   weather: state.FirstView.weather,
+  monies: state.FirstView.monies,
 });
 
 const mapDispatchToProps = {
   getTheWeather,
+  getTheMonies,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(component);
