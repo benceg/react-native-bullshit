@@ -3,11 +3,14 @@ import { Provider } from 'react-redux';
 
 import store from './redux/store';
 
+import Sidebar from './components/Sidebar';
 import FirstView from './containers/FirstView';
 
 const App = () => (
   <Provider store={store}>
-    <FirstView />
+    <Sidebar>
+      <FirstView />
+    </Sidebar>
   </Provider>
 );
 
