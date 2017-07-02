@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ScrollView, View, Text, StyleSheet, TextInput } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TextInput, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import { getTheWeather, getTheMonies, updateUserCurrency } from './actions';
@@ -33,6 +33,23 @@ class component extends Component {
     const { name, weather, monies, userCurrency, getTheMonies, updateUserCurrency } = this.props;
     return (
       <ScrollView contentContainerStyle={styles.container}>
+        {/*TopBar*/}
+        <View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: '#1565C0',
+                paddingTop: 40,
+                paddingBottom: 20
+              }}>
+              <Image
+                style={{
+                  width : 100, 
+                  height: 100,
+                  }}
+                source={require('../../assets/react.png')} 
+              />
+        </View>
+        
         <Text>Hello {name}</Text>
         {weather && (
           <View>
@@ -66,7 +83,7 @@ class component extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 40,
+    paddingTop: 0,
   },
   textInput: {
     width: '75%',
