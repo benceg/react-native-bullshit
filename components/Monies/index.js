@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, TouchableHighlight} from 'react-native';
+import {View, Text, TouchableHighlight, StyleSheet} from 'react-native';
 
 const component = ({ monies, getTheMonies, onTapMoney }) => (
   <View>
-    <TouchableHighlight onPress={getTheMonies} >
-      <Text>Update The currency</Text>
+    <TouchableHighlight onPress={getTheMonies} style={styles.button} >
+      <Text style={styles.btnText}>Update The currency</Text>
     </TouchableHighlight>
     <Text>Base Currency: {monies.base}</Text>
     <View>
@@ -27,5 +27,17 @@ component.propTypes = {
   getTheMonies : PropTypes.func.isRequired,
   onTapMoney: PropTypes.func.isRequired,
 }
+
+const styles = StyleSheet.create({
+  button: {
+    width: '60%',
+    height: 40,
+    backgroundColor : '#ccc',
+    borderRadius: 5
+  },
+  btnText : {
+    textAlign: 'center'
+  }
+});
 
 export default component;
