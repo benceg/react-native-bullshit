@@ -7,6 +7,7 @@ import { getTheWeather, getTheMonies, updateUserCurrency } from './actions';
 
 import Monies from '../../components/Monies';
 import ColouredBar from '../../components/ColouredBar';
+import BaseNav from '../../components/BaseNav';
 
 class component extends Component {
   static propTypes = {
@@ -32,25 +33,26 @@ class component extends Component {
   render() {
     const { name, weather, monies, userCurrency, getTheMonies, updateUserCurrency } = this.props;
     return (
-      <ScrollView contentContainerStyle={styles.container}>
-        {/*TopBar*/}
+      <View style={{height: '100%'}}>
+         {/*TopBar*/}
         <View style={{
-                justifyContent: 'center',
-                alignItems: 'center',
                 backgroundColor: '#1565C0',
                 paddingTop: 40,
-                paddingBottom: 20
+                paddingBottom: 20,
+                paddingLeft: 20,
+                paddingRight: 20,
               }}>
               <Image
                 style={{
-                  width : 100, 
-                  height: 100,
+                  width : 50, 
+                  height: 50,
                   }}
                 source={require('../../assets/react.png')} 
               />
+              <Text>Hello {name}</Text>
         </View>
-        
-        <Text>Hello {name}</Text>
+      <ScrollView contentContainerStyle={styles.container}>
+       
         {weather && (
           <View>
             <Text>Place: {weather.name}</Text>
@@ -75,15 +77,19 @@ class component extends Component {
             />
           </View>
         )}
-        <ColouredBar />
+       
+
       </ScrollView>
+      <BaseNav />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 0,
+    paddingTop: 20,
+    paddingBottom: 70
   },
   textInput: {
     width: '75%',
