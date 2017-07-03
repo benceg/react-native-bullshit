@@ -35,31 +35,26 @@ class component extends Component {
     return (
       <View style={{height: '100%'}}>
          {/*TopBar*/}
-        <View style={{
-                backgroundColor: '#1565C0',
-                paddingTop: 40,
-                paddingBottom: 20,
-                paddingLeft: 20,
-                paddingRight: 20,
-              }}>
-              <Image
-                style={{
-                  width : 50, 
-                  height: 50,
-                  }}
-                source={require('../../assets/react.png')} 
-              />
-              <Text>Hello {name}</Text>
+        <View style={styles.headerBar}>
+          <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
+            <Image
+              style={{
+                width : 50, 
+                height: 50,
+                }}
+              source={require('../../assets/react.png')} 
+            />
+            
+            {weather && (
+              <View style={{paddingLeft : 20,}}>
+                <Text style={{ color : '#fff', fontSize : 20, fontWeight : '700'}}>Hello {name}</Text>
+                <Text style={{ color : '#fff', opacity : 0.9}}>Place: {weather.name}</Text>
+                <Text style={{ color : '#fff', opacity : 0.9}}>Temperature: {weather.main.temp_min}/{weather.main.temp_max}</Text>
+              </View>
+              )}
+          </View>
         </View>
       <ScrollView contentContainerStyle={styles.container}>
-       
-        {weather && (
-          <View>
-            <Text>Place: {weather.name}</Text>
-            <Text>Temperature: {weather.main.temp_min}/{weather.main.temp_max}</Text>
-          </View>
-        )}
-
         {monies && (
           <View>
             <TextInput
@@ -89,13 +84,23 @@ class component extends Component {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
-    paddingBottom: 70
+    paddingBottom: 70, 
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: '#f1f1f1'
   },
   textInput: {
-    width: '75%',
+    width: '100%',
     height: 50,
-    borderWidth: 1,
   },
+  headerBar : {
+    backgroundColor: '#1565C0',
+    paddingTop: 40,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    height: 120
+  }
 });
 
 const mapStateToProps = state => ({
