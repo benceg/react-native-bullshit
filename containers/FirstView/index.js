@@ -92,6 +92,8 @@ const styles = StyleSheet.create({
   textInput: {
     width: '100%',
     height: 50,
+    fontSize: 16
+
   },
   headerBar : {
     backgroundColor: '#1565C0',

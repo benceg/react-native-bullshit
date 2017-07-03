@@ -7,6 +7,7 @@ const component = ({ monies, getTheMonies, onTapMoney }) => (
     <TouchableHighlight onPress={getTheMonies} style={styles.button} >
       <Text style={styles.btnText}>Update The currency</Text>
     </TouchableHighlight>
+
     <Text>Base Currency: {monies.base}</Text>
     <View>
       {monies.rates && Object.keys(monies.rates).map(key => (
@@ -16,7 +17,7 @@ const component = ({ monies, getTheMonies, onTapMoney }) => (
           </Text>
         </TouchableHighlight>
       ))}
-      <Text>____________________________</Text>
+      <View style={styles.hrBar}></View>
       <Text>Last updated : {monies.date}</Text>
     </View>
   </View>
@@ -32,11 +33,21 @@ const styles = StyleSheet.create({
   button: {
     width: '60%',
     height: 40,
-    backgroundColor : '#ccc',
-    borderRadius: 5
+    backgroundColor : '#880E4F',
+    borderRadius: 5,
+    flex: 1, flexDirection: 'row',  alignItems: 'center', justifyContent: 'center'
   },
   btnText : {
-    textAlign: 'center'
+    justifyContent: 'center',
+    color: '#fff',
+    fontSize : 16,
+    fontWeight : '700'
+  },
+  hrBar : {
+    width: '100%',
+    height: 2,
+    marginTop: 10,
+    backgroundColor: '#BBDEFB'
   }
 });
 
